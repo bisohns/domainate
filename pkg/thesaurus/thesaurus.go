@@ -45,7 +45,6 @@ func (b *BigHuge) Synonyms(term string) ([]string, error) {
 	}
 
 	return syns, nil
-
 }
 
 // Thesaurus : interface for any thesaurus API to extend
