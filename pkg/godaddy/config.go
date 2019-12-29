@@ -28,7 +28,7 @@ func GetApiUrl(version string) (string, error) {
 }
 
 func init() {
-	viper.SetEnvPrefix("godaddy") // will be uppercased automatically
-	viper.BindEnv("api_url")
-	viper.BindEnv("sso_key")
+	viper.SetEnvPrefix("godaddy")
+	viper.BindEnv("api_url") // GODADDY_API_URL
+	viper.BindEnv("sso_key") // GODADDY_SSO_KEY
 }

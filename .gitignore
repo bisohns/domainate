@@ -16,3 +16,4 @@
 
 # custlogger
 *.log
+config.toml

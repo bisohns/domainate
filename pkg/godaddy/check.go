@@ -15,7 +15,7 @@ type CheckRequestBody struct {
 	definitive bool
 	domain     string
 	period     int
-	price      uint64
+	price      int64
 }
 
 // CheckAvailability checks if a Domain name is available
@@ -36,7 +36,7 @@ func CheckAvailability(domain string) (data CheckRequestBody, err error) {
 		return data, err
 	}
 	if resp.StatusCode != 200 {
-		return data, fmt.Errorf("%s: %s", resp.StatusCode, resp.Status)
+		return data, fmt.Errorf("%d: %s", resp.StatusCode, resp.Status)
 	}
 	fmt.Println(resp)
 	defer resp.Body.Close()

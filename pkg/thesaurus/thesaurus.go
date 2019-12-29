@@ -22,14 +22,16 @@ type words struct {
 
 // Synonyms : get the synonyms of any word
 func (b *BigHuge) Synonyms(term string) ([]string, error) {
-	var syns []string
+	var (
+		syns []string
+		data synonyms
+	)
 	response, err := http.Get("http://words.bighugelabs.com/api/2/" + b.APIKey + "/" + term + "/json")
 
 	if err != nil {
 		return syns, errors.New(`bighuge: Failed when looking for synonyms for ` + term + `` + err.Error())
 	}
 
-	var data synonyms
 	defer response.Body.Close()
 
 	if err := json.NewDecoder(response.Body).Decode(&data); err != nil {
