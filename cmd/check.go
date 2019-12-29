@@ -16,15 +16,26 @@ limitations under the License.
 package cmd
 
 import (
+	"errors"
 	"fmt"
-
+	"github.com/bisoncorps/domainate/pkg/godaddy"
+	"github.com/bisoncorps/domainate/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
 // checkCmd represents the check command
 var checkCmd = &cobra.Command{
 	Use:   "check",
-	Short: "A brief description of your command",
+	Short: "Checks if a domain name is available",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) < 1 {
+			return errors.New("requires a domain name to check")
+		}
+		if !utils.IsValidDomainName(args[0]) {
+			return fmt.Errorf("Invalid Domain Name: `%s` entered", args[0])
+		}
+		return nil
+	},
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -32,7 +43,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("check called")
+		fmt.Println(godaddy.CheckAvailability(args[0]))
 	},
 }
 
